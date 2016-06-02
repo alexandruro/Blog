@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}{{article.title}}{% endblock %}
+{% block body %}
+<div class="container">
+	<ol class="breadcrumb">
+		<li><a href="/">Home</a></li>
+		<li class="active">{{article.title}}</li>
+	</ol>
+	<div class="post">
+		<div class="post-heading">
+			<div class="post-title">
+				{{article.title}}
+			</div>
+
+			<div class="post-date">
+				{{article.created.strftime("%b %d, %Y")}} by {{article.user}}
+			</div>
+		</div>
+
+		<div class="post-content">
+			{{article.content | safe}}
+		</div>
+
+		<br><br>
+
+		<div class="controls btn-group" role="group" aria-label="...">
+
+			<div class="btn-group" role="group">
+			<a href="{{ "./" ~ article.key().id() ~ "/like" }}">
+				<button class="btn btn-info" type="button">
+	  				Like <span class="badge">{{article.likes}}</span>
+				</button>
+			</a>
+			</div>
+			<div class="btn-group" role="group">
+			<a href="{{ "./" ~ article.key().id() ~ "/comment" }}"><button type="button" class="btn btn-default">Comment</button></a>
+			</div>
+			<div class="btn-group" role="group">
+			<a href="{{ "./" ~ article.key().id() ~ "/edit" }}"><button type="button" class="btn btn-default">Edit</button></a>
+			</div>
+			<div class="btn-group" role="group">
+			<a href="{{ "./" ~ article.key().id() ~ "/delete" }}"><button type="button" class="btn btn-default">Delete</button></a>
+			</div>
+			
+		</div>
+
+		<div class="comments">
+			<br><br><h4>Comments:</h4>
+			{% for comm in comments %}
+				<div class="post-date">
+				{{comm.created.strftime("%b %d, %Y")}} by {{comm.user}}
+				</div>
+				<div class="comm-content">
+					<b>{{comm.user}}:</b> {{comm.content}}
+					<br><a href="{{ "./" ~ article.key().id() ~ "/comm/" ~ comm.key().id() ~ "/edit" }}">Edit</a> | <a href="{{ "./" ~ article.key().id() ~ "/comm/" ~ comm.key().id() ~ "/delete" }}">Delete</a>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}

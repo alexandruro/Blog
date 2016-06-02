@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Edit comment{% endblock %}
+{% block body %}
+	<div class="container">
+		<ol class="breadcrumb">
+  			<li><a href="/">Home</a></li>
+  			<li><a href="/posts/{{article.key().id()}}">{{article.title}}</a></li>
+  			<li class="active">Edit comment</li>
+  		</ol>
+
+		<form method="post">
+			<div class="form-group {% if error %}has-error{% endif %}">
+				<label>Content</label>
+				<label class="control-label">{{error}}</label>
+        		<textarea class="form-control" name="content" placeholder="Content">{{comment.content}}</textarea>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+{% endblock %}

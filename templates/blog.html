@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Front Page{% endblock %}
+{% block body %}
+<div class="container">
+		<h1 style="text-align: center">Welcome! This is the front page of my blog!</h1>
+		{% if not articles %}
+			<br>
+			<h2>There are no posts yet. Come back later.</h2>
+		{% endif %}
+		{% for article in articles %}
+			<div class="post">
+  				<div class="post-heading">
+    				<div class="post-title">
+      					<a href={{ "/posts/" ~ article.key().id() }}>{{article.title}}</a>
+    				</div>
+
+    			<div class="post-date">
+      				{{article.created.strftime("%b %d, %Y")}} by {{article.user}}
+    			</div>
+  			</div>
+
+  			<div class="post-content">
+    			{{article.content | safe}}
+  			</div>
+      </div>
+			
+		{% endfor %}
+</div>
+
+{% endblock %}
