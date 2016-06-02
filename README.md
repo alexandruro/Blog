@@ -43,3 +43,7 @@ After these are installed, the application can be run like so:
 ```bash
 $ python main.py
 ```
+
+## Future updates
+* sharing to social media
+* better styling
