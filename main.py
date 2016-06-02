@@ -91,9 +91,9 @@ class Handler(webapp2.RequestHandler):
 # Front page handler, shows the last 10 articles
 class MainHandler(Handler):
 	def get(self):
-		articles = db.GqlQuery("""SELECT * FROM Article 
-			ORDER BY created DESC LIMIT 10""")
-        self.render("blog.html", isLogged = self.isLogged(), 
+		articles = db.GqlQuery("SELECT * FROM Article ORDER BY created DESC LIMIT 10")
+		isLogged = self.isLogged()
+		self.render("blog.html", isLogged = isLogged, 
         	articles = articles)
 
 
